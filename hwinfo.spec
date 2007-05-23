@@ -1,7 +1,11 @@
 #
 # TODO:
 # - polish description
-Summary:	hwinfo is the hardware detection tool used in SuSE Linux.
+# - -devel/static etc?
+# - can't build:
+#In file included from hal.c:19:
+#/usr/include/hal/libhal.h:29:23: dbus/dbus.h: No such file or directory
+Summary:	hwinfo is the hardware detection tool used in SuSE Linux
 Name:		hwinfo
 Version:	13.11
 Release:	0.1
@@ -11,8 +15,8 @@ Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig
 # Source0-md5:	afc560ebe9404fcb1553bc9ebda69700
 Patch0:		%{name}-kbd.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
-BuildRequires:	hal-devel
 BuildRequires:	dbus-devel
+BuildRequires:	hal-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -23,7 +27,9 @@ hwinfo is the hardware detection tool used in SuSE Linux.
 %patch0 -p0
 
 %build
-%{__make}
+%{__make} -j1 \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -36,8 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_libdir}/libhd.so*
-/usr/sbin
-%attr(644,root,root) %{_includedir}
-%attr(644,root,root) %{_libdir}/pkgconfig/hwinfo.pc
-%attr(644,root,root) %{_datadir}/%{name}
+%attr(755,root,root) %{_libdir}/libhd.so*
+%{_datadir}/%{name}
+%attr(755,root,root) %{_sbindir}/*
+%{_includedir}/*
+%{_pkgconfigdir}/hwinfo.pc
