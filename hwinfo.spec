@@ -1,13 +1,12 @@
 #
 # TODO:
 # - polish description
-# group sys/apps
 Summary:	hwinfo is the hardware detection tool used in SuSE Linux.
 Name:		hwinfo
 Version:	13.11
 Release:	0.1
 License:	GPL
-Group:		X11/Applications
+Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig.tar.gz
 # Source0-md5:	afc560ebe9404fcb1553bc9ebda69700
 Patch0:		%{name}-kbd.patch
