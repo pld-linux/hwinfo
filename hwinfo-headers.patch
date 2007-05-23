@@ -1,0 +1,11 @@
+--- x/src/hd/manual.c	2006-08-29 16:15:38.000000000 +0200
++++ x/src/hd/manual.c	2007-05-23 20:58:58.000000000 +0200
+@@ -20,7 +20,7 @@
+  * @{
+  */
+ 
+-#include <hwclass_names.h>
++#include "hwclass_names.h"
+ 
+ /* corresponds to hd_status_value_t */
+ static hash_t status_names[] = {
