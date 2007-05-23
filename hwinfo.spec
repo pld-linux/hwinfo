@@ -1,11 +1,11 @@
 #
 # TODO:
-# - polish description
 # - -devel/static etc?
 # - can't build:
 #In file included from hal.c:19:
 #/usr/include/hal/libhal.h:29:23: dbus/dbus.h: No such file or directory
-Summary:	hwinfo is the hardware detection tool used in SuSE Linux
+Summary:	hwinfo - the hardware detection tool used in SuSE Linux
+Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
 Version:	13.11
 Release:	0.1
@@ -18,10 +18,26 @@ Patch1:		%{name}-headers.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
 BuildRequires:	hal-devel
 BuildRequires:	linux-libc-headers >= 7:2.6.20
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 hwinfo is the hardware detection tool used in SuSE Linux.
+
+%description -l pl.UTF-8
+hwinfo to narzędzie do wykrywania sprzętu używane w SuSE Linuksie.
+
+%package devel
+Summary:	Header files for hwinfo library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki hwinfo
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description devel
+Header files for hwinfo library.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki hwinfo.
 
 %prep
 %setup -q
@@ -42,10 +58,16 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/libhd.so*
 %{_datadir}/%{name}
-%attr(755,root,root) %{_sbindir}/*
+
+%files devel
+%defattr(644,root,root,755)
 %{_includedir}/*
 %{_pkgconfigdir}/hwinfo.pc
