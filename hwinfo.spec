@@ -1,9 +1,7 @@
 #
 # TODO:
-# - -devel/static etc?
-# - can't build:
-#In file included from hal.c:19:
-#/usr/include/hal/libhal.h:29:23: dbus/dbus.h: No such file or directory
+# - -static etc?
+# - doesn't build:
 Summary:	hwinfo - the hardware detection tool used in SuSE Linux
 Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
@@ -16,6 +14,7 @@ Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig
 Patch0:		%{name}-kbd.patch
 Patch1:		%{name}-headers.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
+BuildRequires:	flex
 BuildRequires:	hal-devel
 BuildRequires:	linux-libc-headers >= 7:2.6.20
 BuildRequires:	pkgconfig
