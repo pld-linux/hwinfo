@@ -1,7 +1,3 @@
-#
-# TODO:
-# - -static etc?
-# - doesn't build:
 Summary:	hwinfo - the hardware detection tool used in SuSE Linux
 Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
@@ -14,6 +10,7 @@ Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig
 Patch0:		%{name}-kbd.patch
 Patch1:		%{name}-headers.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
+BuildRequires:	dbus-devel >= 0.35
 BuildRequires:	flex
 BuildRequires:	hal-devel
 BuildRequires:	linux-libc-headers >= 7:2.6.20
@@ -46,7 +43,7 @@ Pliki nagłówkowe biblioteki hwinfo.
 %build
 %{__make} -j1 \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} `pkg-config --cflags dbus-1`"
+	RPM_OPT_FLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -63,10 +60,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/libhd.so*
+%attr(755,root,root) %{_libdir}/libhd.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libhd.so.13
 %{_datadir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/libhd.so
+%{_includedir}/hd.h
 %{_pkgconfigdir}/hwinfo.pc
