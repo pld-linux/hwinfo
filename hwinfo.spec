@@ -9,6 +9,7 @@ Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig
 # Source0-md5:	afc560ebe9404fcb1553bc9ebda69700
 Patch0:		%{name}-kbd.patch
 Patch1:		%{name}-headers.patch
+Patch2:		%{name}-x86_64.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
 BuildRequires:	dbus-devel >= 0.35
 BuildRequires:	flex
@@ -39,6 +40,9 @@ Pliki nagłówkowe biblioteki hwinfo.
 %setup -q
 %patch0 -p0
 %patch1 -p1
+%ifarch %{x8664}
+%patch2 -p1
+%endif
 
 %build
 %{__make} -j1 \
