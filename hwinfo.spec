@@ -40,7 +40,7 @@ Pliki nagłówkowe biblioteki hwinfo.
 %setup -q
 %patch0 -p0
 %patch1 -p1
-%ifarch %{x8664}
+%if "%{_lib}" == "lib64"
 %patch2 -p1
 %endif
 
