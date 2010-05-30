@@ -1,12 +1,12 @@
 Summary:	hwinfo - the hardware detection tool used in SuSE Linux
 Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
-Version:	15.3
+Version:	16.0
 Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	7bd0f333fea8124cc83769b3f453efc0
+# Source0-md5:	b7e5cae47a373b75abd5a4a5f7584b98
 Patch0:		%{name}-kbd.patch
 Patch1:		%{name}-headers.patch
 Patch2:		%{name}-x86_64.patch
@@ -67,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/libhd.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/libhd.so.15
+%attr(755,root,root) %ghost %{_libdir}/libhd.so.??
 %{_datadir}/%{name}
 
 %files devel
