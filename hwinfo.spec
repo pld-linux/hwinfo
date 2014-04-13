@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	hal	# HAL support
+#
 Summary:	hwinfo - the hardware detection tool used in SuSE Linux
 Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
@@ -13,7 +17,7 @@ Patch2:		%{name}-x86_64.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
 BuildRequires:	dbus-devel >= 0.35
 BuildRequires:	flex
-BuildRequires:	hal-devel
+%{?with_hal:BuildRequires:	hal-devel}
 %ifarch %{ix86} %{x8664}
 BuildRequires:	libx86emu-devel >= 1
 %endif
@@ -51,7 +55,7 @@ Pliki nagłówkowe biblioteki hwinfo.
 %{__make} -j1 \
 	ARCH=%{_target_base_arch} \
 	CC="%{__cc}" \
-	RPM_OPT_FLAGS="%{rpmcflags}"
+	RPM_OPT_FLAGS="%{rpmcflags} %{?with_hal:-DWITH_HAL}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
