@@ -1,16 +1,16 @@
 #
 # Conditional build:
 %bcond_with	hal	# HAL support
-#
+
 Summary:	hwinfo - the hardware detection tool used in SuSE Linux
 Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
-Version:	21.3
+Version:	21.6
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	594f879cf646131057f7e8e296ec6cf9
+# Source0-md5:	a832ca369cba502815b0d5e1b1b405bc
 Patch0:		%{name}-kbd.patch
 Patch1:		%{name}-headers.patch
 Patch2:		%{name}-x86_64.patch
@@ -44,15 +44,20 @@ Header files for hwinfo library.
 Pliki nagłówkowe biblioteki hwinfo.
 
 %prep
-%setup -q -c
+%setup -q
 %patch0 -p0
 %patch1 -p1
 %if "%{_lib}" == "lib64"
 %patch2 -p1
 %endif
 
+# these should be in tarball, but aren't (21.6)
+test -e VERSION || echo %{version} > VERSION
+test -e changelog || touch changelog
+
 %build
 %{__make} -j1 \
+	VERSION=%{version} \
 	ARCH=%{_target_base_arch} \
 	CC="%{__cc}" \
 	RPM_OPT_FLAGS="%{rpmcflags} %{?with_hal:-DWITH_HAL}"
