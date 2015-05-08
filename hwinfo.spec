@@ -18,7 +18,7 @@ URL:		http://packages.qa.debian.org/h/hwinfo.html
 BuildRequires:	dbus-devel >= 0.35
 BuildRequires:	flex
 %{?with_hal:BuildRequires:	hal-devel}
-%ifarch %{ix86} %{x8664}
+%ifarch %{ix86} %{x8664} x32
 BuildRequires:	libx86emu-devel >= 1
 %endif
 BuildRequires:	linux-libc-headers >= 7:2.6.20
