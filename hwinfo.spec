@@ -13,7 +13,6 @@ Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig
 # Source0-md5:	3a97acf3e32e43dfea13b90da1a8403a
 Patch0:		%{name}-kbd.patch
 Patch1:		%{name}-headers.patch
-Patch2:		%{name}-x86_64.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
 BuildRequires:	dbus-devel >= 0.35
 BuildRequires:	flex
@@ -47,9 +46,6 @@ Pliki nagłówkowe biblioteki hwinfo.
 %setup -q
 %patch0 -p0
 %patch1 -p1
-%if "%{_lib}" == "lib64"
-%patch2 -p1
-%endif
 
 # these should be in tarball, but aren't (21.6)
 test -e VERSION || echo %{version} > VERSION
@@ -60,13 +56,15 @@ test -e changelog || touch changelog
 	VERSION=%{version} \
 	ARCH=%{_target_base_arch} \
 	CC="%{__cc}" \
+	LIBDIR=%{_libdir} \
 	RPM_OPT_FLAGS="%{rpmcflags} %{?with_hal:-DWITH_HAL}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	LIBDIR=%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
