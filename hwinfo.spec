@@ -5,16 +5,14 @@
 Summary:	hwinfo - the hardware detection tool used in SuSE Linux
 Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
-Version:	21.12
-Release:	2
+Version:	21.72
+Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	http://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	3a97acf3e32e43dfea13b90da1a8403a
+Source0:	https://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig.tar.gz
+# Source0-md5:	d33995be010185840f99c4eff4f699f0
 Patch0:		%{name}-kbd.patch
-Patch1:		%{name}-headers.patch
 URL:		http://packages.qa.debian.org/h/hwinfo.html
-BuildRequires:	dbus-devel >= 0.35
 BuildRequires:	flex
 %{?with_hal:BuildRequires:	hal-devel}
 %ifarch %{ix86} %{x8664} x32
@@ -45,7 +43,6 @@ Pliki nagłówkowe biblioteki hwinfo.
 %prep
 %setup -q
 %patch0 -p0
-%patch1 -p1
 
 # these should be in tarball, but aren't (21.6)
 test -e VERSION || echo %{version} > VERSION
@@ -74,7 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc MAINTAINER README changelog
+%doc MAINTAINER README.md changelog
 %attr(755,root,root) %{_sbindir}/check_hd
 %attr(755,root,root) %{_sbindir}/convert_hd
 %attr(755,root,root) %{_sbindir}/getsysinfo

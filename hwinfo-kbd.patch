@@ -12,5 +12,5 @@
      }
 +    */
  
-     if(tty_major == 229 /* iseries hvc */) {
-       if (tty_minor >= 128) {
+     if (0)
+ 	    ;
