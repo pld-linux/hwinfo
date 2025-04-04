@@ -5,16 +5,16 @@
 Summary:	hwinfo - the hardware detection tool used in SuSE Linux
 Summary(pl.UTF-8):	hwinfo - narzędzie do wykrywania sprzętu używane w SuSE Linuksie
 Name:		hwinfo
-Version:	21.72
+Version:	21.82
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://ftp.debian.org/debian/pool/main/h/hwinfo/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	d33995be010185840f99c4eff4f699f0
-Patch0:		%{name}-kbd.patch
-URL:		http://packages.qa.debian.org/h/hwinfo.html
+# Source0-md5:	ef3df7f325fe4129f45314e647d1ef6b
+URL:		https://packages.qa.debian.org/h/hwinfo.html
 BuildRequires:	flex
 %{?with_hal:BuildRequires:	hal-devel}
+BuildRequires:	libuuid-devel
 %ifarch %{ix86} %{x8664} x32
 BuildRequires:	libx86emu-devel >= 1
 %endif
@@ -42,7 +42,6 @@ Pliki nagłówkowe biblioteki hwinfo.
 
 %prep
 %setup -q
-%patch -P0 -p0
 
 # these should be in tarball, but aren't (21.6)
 test -e VERSION || echo %{version} > VERSION
