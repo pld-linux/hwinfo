@@ -42,7 +42,7 @@ Pliki nagłówkowe biblioteki hwinfo.
 
 %prep
 %setup -q
-%patch0 -p0
+%patch -P0 -p0
 
 # these should be in tarball, but aren't (21.6)
 test -e VERSION || echo %{version} > VERSION
